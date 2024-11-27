@@ -11,7 +11,7 @@
         <div class="form_full">
           <div class="background">
             <p>ДАННЫЕ ДЛЯ ОТПРАВКИ</p>
-            <form class="form">
+            <form class="form" @submit.prevent="sendData">
               <div class="inputs_radio">
                 <div class="form_input">
                   <input type="radio" id="self" name="radio" value="false">
@@ -25,15 +25,15 @@
               <div class="inputs_inputs">
                 <div class="input_label">
                   <label for="name">Имя</label>
-                  <input name="name" id="name" type="text" placeholder="Введите имя"/>
+                  <input v-model="form.name" name="name" id="name" type="text" placeholder="Введите имя"/>
                 </div>
                 <div class="input_label">
                   <label for="mail">Email</label>
-                  <input name="mail" id="mail" type="email" placeholder="Email"/>
+                  <input v-model="form.mail" name="mail" id="mail" type="email" placeholder="Email"/>
                 </div>
                 <div class="input_label">
                   <label for="text">Сообщение</label>
-                  <input name="text" id="text" type="text" placeholder="Сообщение для получателя" />
+                  <input v-model="form.text" name="text" id="text" type="text" placeholder="Сообщение для получателя" />
                 </div>
               </div>
               <button type="submit">Отправить</button>
@@ -45,7 +45,7 @@
         <div class="background">
           <p>ВЫБЕРИТЕ ЦВЕТ ФОНА ИЛИ ФОНОВУЮ КАРТИНКУ</p>
           <div class="background_color">
-            <input type="color" @input="changeColor">
+            <input type="color" v-model="form.background" @input="changeColor">
             <div class="fonts_image">
               <img src="@/assets/images/bg1.jpg" alt="picture" @click="changeColor">
               <img src="@/assets/images/bg2.jpg" alt="picture" @click="changeColor">
@@ -65,7 +65,7 @@
           <div class="shrift_nominal">
             <div class="shrift">
               <p>ВЫБЕРИТЕ ЦВЕТ ШРИФТА КАРТЫ</p>
-              <input type="color" @input="changeColorText">
+              <input type="color" v-model="form.textCard" @input="changeColorText">
             </div>
             <div class="nominal">
               <p>ВЫБЕРИТЕ НОМИНАЛ</p>
@@ -109,6 +109,15 @@ export default {
     return {
       backgroundCard: null,
       nominalCard: 1000,
+      form: {
+        name: '',
+        mail: '',
+        text: '',
+        nominal: '',
+        background: '',
+        textCard: ''
+      },
+      file: null
     }
   },
   methods: {
@@ -123,7 +132,7 @@ export default {
         card.style.backgroundSize = '100% 100%';
         card.style.backgroundRepeat = 'no-repeat';
       } else {
-        document.querySelector('.card').style.background = `${newValue}`;
+        card.style.background = `${newValue}`;
       }
     },
     changeColorText(event) {
@@ -132,16 +141,31 @@ export default {
     },
     addNominal(event) {
       this.nominalCard = event.target.value;
+      this.form.nominal = event.target.value;
     },
     getFile(event) {
       let card = document.querySelector('.card')
       const file = event.target.files[0];
+      this.file = file;
+      console.log(this.file);
       let linkFile = window.URL.createObjectURL(file);
-      console.log(linkFile);
       card.style.backgroundImage = `url(${linkFile})`;
       card.style.backgroundPosition = 'center';
       card.style.backgroundSize = '100% 100%';
       card.style.backgroundRepeat = 'no-repeat';
+    },
+    sendData() {
+      let formData = new FormData();
+      formData.append('file', this.file);
+      formData.append('name', this.form.name);
+      formData.append('mail', this.form.mail);
+      formData.append('text', this.form.text);
+      formData.append('nominal', this.form.nominal);
+      formData.append('background', this.form.background);
+      formData.append('textColor', this.form.textCard);
+      for (let [key, value] of formData.entries()) {
+        console.log(key, value);
+      }
     }
   },
   watch: {
@@ -239,6 +263,7 @@ export default {
   text-align: center;
   color: #333;
   font-size: 16px;
+  font-weight: 500;
 }
 .background_color {
   width: 100%;
