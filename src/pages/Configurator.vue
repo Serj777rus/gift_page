@@ -25,15 +25,15 @@
               <div class="inputs_inputs">
                 <div class="input_label">
                   <label for="name">Имя</label>
-                  <input v-model="form.name" name="name" id="name" type="text" placeholder="Введите имя"/>
+                  <input v-model="form.name" name="name" id="name" type="text" placeholder="Введите имя" required />
                 </div>
                 <div class="input_label">
                   <label for="mail">Email</label>
-                  <input v-model="form.mail" name="mail" id="mail" type="email" placeholder="Email"/>
+                  <input v-model="form.mail" name="mail" id="mail" type="email" placeholder="Email" required />
                 </div>
                 <div class="input_label">
                   <label for="text">Сообщение</label>
-                  <input v-model="form.text" name="text" id="text" type="text" placeholder="Сообщение для получателя" />
+                  <input v-model="form.text" name="text" id="text" type="text" placeholder="Сообщение для получателя" required/>
                 </div>
               </div>
               <button type="submit">Отправить</button>
@@ -65,7 +65,7 @@
           <div class="shrift_nominal">
             <div class="shrift">
               <p>ВЫБЕРИТЕ ЦВЕТ ШРИФТА КАРТЫ</p>
-              <input type="color" v-model="form.textCard" @input="changeColorText">
+              <input type="color" v-model="textCard" @input="changeColorText">
             </div>
             <div class="nominal">
               <p>ВЫБЕРИТЕ НОМИНАЛ</p>
@@ -104,18 +104,18 @@
 </template>
 
 <script>
+import axios from "axios";
+import html2canvas from "html2canvas";
 export default {
   data() {
     return {
       backgroundCard: null,
+      textCard: null,
       nominalCard: 1000,
       form: {
         name: '',
         mail: '',
-        text: '',
-        nominal: '',
-        background: '',
-        textCard: ''
+        text: ''
       },
       file: null
     }
@@ -154,17 +154,29 @@ export default {
       card.style.backgroundSize = '100% 100%';
       card.style.backgroundRepeat = 'no-repeat';
     },
-    sendData() {
-      let formData = new FormData();
-      formData.append('file', this.file);
-      formData.append('name', this.form.name);
-      formData.append('mail', this.form.mail);
-      formData.append('text', this.form.text);
-      formData.append('nominal', this.form.nominal);
-      formData.append('background', this.form.background);
-      formData.append('textColor', this.form.textCard);
-      for (let [key, value] of formData.entries()) {
-        console.log(key, value);
+    async sendData() {
+      // let formData = new FormData();
+      // formData.append('file', this.file);
+      // formData.append('name', this.form.name);
+      // formData.append('mail', this.form.mail);
+      // formData.append('text', this.form.text);
+      // formData.append('nominal', this.form.nominal);
+      // formData.append('background', this.form.background);
+      // formData.append('textColor', this.form.textCard);
+      // for (let [key, value] of formData.entries()) {
+      //   console.log(key, value);
+      // }
+      const card = document.querySelector('.card')
+      const canvas = await html2canvas(card, {scale: 1})
+      const dataUrl = canvas.toDataURL('image/png');
+      console.log(dataUrl);
+      try {
+        const response = await axios.post('http://192.168.31.46:3000/datas', {image: dataUrl, name: this.form.name, mail: this.form.mail, text: this.form.text});
+        if (response.status === 200) {
+          console.log(response);
+        }
+      } catch(error) {
+        console.log(error);
       }
     }
   },
