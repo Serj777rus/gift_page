@@ -136,7 +136,7 @@ app.post('/datas', (req, res) => {
                                                                     <tr>
                                                                         <td width="580" valign="top" class="em-mob-wrap em-mob-width-100perc">
                                                                             <table cellpadding="0" cellspacing="0" border="0" width="100%" em="atom"><tr><td>
-                          <img src="${fileName}.png" width="660" border="0" alt="" style="display: block; width: 100%; max-width: 660px;">
+                          <img src="https://admin.webmarvels.ru/pdfs/${fileName}.png" width="660" border="0" alt="" style="display: block; width: 100%; max-width: 660px;">
                         </td></tr></table>
                                                                         </td>
                                                                     </tr></table>
