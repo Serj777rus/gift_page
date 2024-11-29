@@ -167,7 +167,7 @@ export default {
       //   console.log(key, value);
       // }
       const card = document.querySelector('.card')
-      const canvas = await html2canvas(card, {scale: 1})
+      const canvas = await html2canvas(card, {scale: 3})
       const dataUrl = canvas.toDataURL('image/png');
       console.log(dataUrl);
       try {
