@@ -191,7 +191,7 @@ export default {
       const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
       this.loader = true
       this.form.name = '';
-      this.form.email = '';
+      this.form.mail = '';
       this.form.text = ''
       try {
         const response = await axios.post('api/datas', {image: dataUrl, name: this.form.name, mail: this.form.mail, text: this.form.text});
