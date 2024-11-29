@@ -190,11 +190,11 @@ export default {
       const canvas = await html2canvas(card, {scale: 1.5})
       const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
       this.loader = true
-      this.form.name = '';
-      this.form.mail = '';
-      this.form.text = ''
       try {
         const response = await axios.post('api/datas', {image: dataUrl, name: this.form.name, mail: this.form.mail, text: this.form.text});
+        this.form.name = '';
+        this.form.mail = '';
+        this.form.text = ''
         if (response.status === 200) {
           this.loader = false;
           console.log(response);
