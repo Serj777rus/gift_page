@@ -28,10 +28,10 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.post('/datas', (req, res) => {
     const { image, name, mail, text } = req.body;
     console.log(req.body);
-    const images = image.replace(/^data:image\/png;base64,/, '')
+    const images = image.replace(/^data:image\/jpeg;base64,/, '')
     const fileName = Date.now();
     const outputDir = './pdfs'
-    const pathFile = `${outputDir}/${fileName}.png`;
+    const pathFile = `${outputDir}/${fileName}.jpeg`;
     fs.writeFile(pathFile, images, 'base64', (err) => {
         if (err) {
             console.log(err);
@@ -136,7 +136,7 @@ app.post('/datas', (req, res) => {
                                                                     <tr>
                                                                         <td width="580" valign="top" class="em-mob-wrap em-mob-width-100perc">
                                                                             <table cellpadding="0" cellspacing="0" border="0" width="100%" em="atom"><tr><td>
-                          <img src="https://admin.webmarvels.ru/pdfs/${fileName}.png" width="660" border="0" alt="" style="display: block; width: 100%; max-width: 660px;">
+                          <img src="https://admin.webmarvels.ru/pdfs/${fileName}.jpeg" width="660" border="0" alt="" style="display: block; width: 100%; max-width: 660px;">
                         </td></tr></table>
                                                                         </td>
                                                                     </tr></table>
