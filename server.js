@@ -215,7 +215,9 @@ app.post('/datas', (req, res) => {
                         </body>
                         </html>`,
         })
-        res.status(200).send({message: 'Successfully created PDF'});
+        if (response) {
+            res.status(200).send({message: 'Successfully created PDF'});
+        }
     })
 })
 

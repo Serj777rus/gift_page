@@ -101,6 +101,24 @@
       </div>
     </div>
   </div>
+  <div class="loader_container" v-if="loader">
+    <div class="loader">
+      <div class="cube">
+        <div class="face"></div>
+        <div class="face"></div>
+        <div class="face"></div>
+        <div class="face"></div>
+        <div class="face"></div>
+        <div class="face"></div>
+      </div>
+    </div>
+  </div>
+  <div class="thanks_container" v-if="thanks">
+    <div class="thanks_main">
+      <h2>Спасибо за приобретенный сертификат!</h2>
+      <p>Он уже доставлен на указанную почту и готов к использованию. Спасибо что выбрали нас!</p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -117,7 +135,9 @@ export default {
         mail: '',
         text: ''
       },
-      file: null
+      file: null,
+      loader: false,
+      thanks: false,
     }
   },
   methods: {
@@ -169,11 +189,18 @@ export default {
       const card = document.querySelector('.card')
       const canvas = await html2canvas(card, {scale: 3})
       const dataUrl = canvas.toDataURL('image/png');
-      console.log(dataUrl);
       try {
         const response = await axios.post('api/datas', {image: dataUrl, name: this.form.name, mail: this.form.mail, text: this.form.text});
+        this.loader = true
+        this.form.name = '';
+        this.form.email = '';
+        this.form.text = ''
         if (response.status === 200) {
           console.log(response);
+          this.thanks = true;
+          setTimeout(() => {
+            this.thanks = false
+          }, 2500)
         }
       } catch(error) {
         console.log(error);
@@ -480,5 +507,107 @@ form button {
   top: 0;
   left: 0;
   z-index: 5;
+}
+/* From Uiverse.io by Deri-Kurniawan */
+.loader_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.7);
+}
+.loader {
+  perspective: 600px;
+  width: 100px;
+  height: 100px;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: rotate 4s linear infinite;
+}
+
+.face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #3498db, #e74c3c);
+  opacity: 0.8;
+  border: 0.5px solid #fff;
+  border-radius: 25%;
+}
+
+.face:nth-child(1) {
+  transform: rotateX(90deg) translateZ(50px);
+}
+
+.face:nth-child(2) {
+  transform: rotateX(-90deg) translateZ(50px);
+}
+
+.face:nth-child(3) {
+  transform: translateZ(50px);
+}
+
+.face:nth-child(4) {
+  transform: rotateY(90deg) translateZ(50px);
+}
+
+.face:nth-child(5) {
+  transform: rotateY(-90deg) translateZ(50px);
+}
+
+.face:nth-child(6) {
+  transform: rotateY(180deg) translateZ(50px);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+
+  100% {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+.thanks_container {
+  width: 100%;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.7);
+  font-family: "Montserrat", sans-serif;
+}
+.thanks_main {
+  width: 700px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  padding: 32px;
+}
+.thanks_main h2 {
+  font-size: 48px;
+  font-weight: 700;
+  color: #333333;
+  text-align: center;
+}
+.thanks_main p {
+  font-size: 24px;
+  font-weight: 300;
+  color: #333333;
+  text-align: center;
 }
 </style>
