@@ -196,6 +196,7 @@ export default {
         this.form.email = '';
         this.form.text = ''
         if (response.status === 200) {
+          this.loader = false;
           console.log(response);
           this.thanks = true;
           setTimeout(() => {
