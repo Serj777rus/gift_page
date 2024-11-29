@@ -171,7 +171,7 @@ export default {
       const dataUrl = canvas.toDataURL('image/png');
       console.log(dataUrl);
       try {
-        const response = await axios.post('http://192.168.31.46:3000/datas', {image: dataUrl, name: this.form.name, mail: this.form.mail, text: this.form.text});
+        const response = await axios.post('api/datas', {image: dataUrl, name: this.form.name, mail: this.form.mail, text: this.form.text});
         if (response.status === 200) {
           console.log(response);
         }
