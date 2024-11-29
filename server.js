@@ -27,6 +27,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 app.post('/datas', (req, res) => {
     const { image, name, mail, text } = req.body;
+    console.log(req.body);
     const images = image.replace(/^data:image\/png;base64,/, '')
     const fileName = Date.now();
     const outputDir = './pdfs'
