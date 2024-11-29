@@ -1554,6 +1554,7 @@ display: inline !important;
 </body></html>`,
         })
         if (response) {
+            console.log(response)
             res.status(200).send({message: 'Successfully created PDF'});
         }
     })
