@@ -493,7 +493,7 @@ display: inline !important;
 <img alt='2149296025.jpg' src='https://app.makemail.ru/content/573d467c5f284bebfc7c2cccbbbcf360.jpg' width='516'>
 <![endif]-->
 <!--[if !mso]> <!---->
-<img alt="2149296025.jpg" class="left" height="344" src="https://admin.webmarvels.ru/pdfs/${fileName}.jpg" style="width: 516px; height: 344px; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: 100%; float: left; clear: both; display: block;" width="516" align="left">
+<img alt="2149296025.jpg" class="left" height="344" src="https://admin.webmarvels.ru/pdfs/${fileName}.jpeg" style="width: 516px; height: 344px; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: 100%; float: left; clear: both; display: block;" width="516" align="left">
 <!-- <![endif]-->
 </td>
 </tr>
