@@ -40,6 +40,7 @@ export default {
 .main {
   display: flex;
   width: 100vw;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   background-image: url("@/assets/images/8777536.jpg");
