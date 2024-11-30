@@ -6,7 +6,7 @@
       </div>
       <div class="main_content">
         <h2>ПОДАРОЧНЫЙ СЕРТИФИКАТ</h2>
-        <h6>ПОДАРИ ВТОРОЙ ПОЛОВИНКЕ СЧАСТЬЕ</h6>
+<!--        <h6>ПОДАРИ ВТОРОЙ ПОЛОВИНКЕ СЧАСТЬЕ</h6>-->
       </div>
       <div class="gift_card_block">
         <div class="card">
