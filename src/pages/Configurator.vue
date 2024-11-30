@@ -187,7 +187,7 @@ export default {
       //   console.log(key, value);
       // }
       const card = document.querySelector('.card')
-      const canvas = await html2canvas(card, {scale: 1.5})
+      const canvas = await html2canvas(card, {scale: 1.5, backgroundColor: null})
       const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
       this.loader = true
       try {
@@ -259,6 +259,7 @@ export default {
   background-position: center;
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  overflow: hidden;
   transition: all 200ms ease;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
