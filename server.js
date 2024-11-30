@@ -549,7 +549,7 @@ display: inline !important;
 <img alt='still-life-rendering-jackets-display 1.png' src='https://admin.webmarvels.ru/pdfs/${fileName}' width='580'>
 <![endif]-->
 <!--[if !mso]> <!---->
-<img alt="still-life-rendering-jackets-display 1.png" class="left" height="472" src="https://admin.webmarvels.ru/pdfs/${fileName}" style="width: 580px; height: 472px; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: 100%; float: left; clear: both; display: block;" width="580" align="left">
+<img alt="still-life-rendering-jackets-display 1.png" class="left" height="472" src="https://admin.webmarvels.ru/pdfs/${fileName}" style="width: 580px; height: auto; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: 100%; float: left; clear: both; display: block;" width="580" align="left">
 <!-- <![endif]-->
 </td>
 </tr>
